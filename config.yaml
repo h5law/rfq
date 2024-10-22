@@ -1,0 +1,247 @@
+users:
+  - user1:
+    name: "alice"
+    tokens:
+      - token1:
+        ticker: "TOK1"
+        usd: 10
+        amount: 50
+        domain:
+          name: "dom1"
+      - token2:
+        ticker: "TOK3"
+        usd: 50
+        amount: 2
+        domain:
+          name: "dom1"
+  - user2:
+    name: "bob"
+    tokens:
+      - token1:
+        ticker: "TOK1"
+        usd: 10
+        amount: 100
+        domain:
+          name: "dom0"
+      - token2:
+        ticker: "TOK2"
+        usd: 5
+        amount: 200
+        domain:
+          name: "dom1"
+
+solvers:
+  - solver1:
+    name: "mm1"
+    positions:
+      - pos1:
+        pair:
+          - tokenA:
+            ticker: "TOK1"
+            usd: 10
+            amount: 500
+            domain:
+              name: "dom1"
+          - tokenB:
+            ticker: "TOK3"
+            usd: 50
+            amount: 100
+            domain:
+              name: "dom1"
+        pool:
+          pair:
+            - tokenA:
+              ticker: "TOK1"
+              usd: 10
+              amount: 10500
+              domain:
+                name: "dom1"
+            - tokenB:
+              ticker: "TOK3"
+              usd: 50
+              amount: 2100
+              domain:
+                name: "dom1"
+          domain:
+            name: "dom1"
+      - pos2:
+        pair:
+          - tokenA:
+            ticker: "TOK1"
+            usd: 10
+            amount: 400
+            domain:
+              name: "dom1"
+          - tokenB:
+            ticker: "TOK2"
+            usd: 5
+            amount: 800
+            domain:
+              name: "dom1"
+        pool:
+          pair:
+            - tokenA:
+              ticker: "TOK1"
+              usd: 10
+              amount: 11100
+              domain:
+                name: "dom1"
+            - tokenB:
+              ticker: "TOK2"
+              usd: 5
+              amount: 22200
+              domain:
+                name: "dom1"
+          domain:
+            name: "dom1"
+      - pos3:
+        pair:
+          - tokenA:
+            ticker: "TOK2"
+            usd: 5
+            amount: 100
+            domain:
+              name: "dom1"
+          - tokenB:
+            ticker: "TOK3"
+            usd: 50
+            amount: 10
+            domain:
+              name: "dom1"
+        pool:
+          pair:
+            - tokenA:
+              ticker: "TOK2"
+              usd: 5
+              amount: 25000
+              domain:
+                name: "dom1"
+            - tokenB:
+              ticker: "TOK3"
+              usd: 50
+              amount: 2500
+              domain:
+                name: "dom1"
+          domain:
+            name: "dom1"
+  - mm2:
+    name: "mm2"
+    positions:
+      - pos1:
+        pair:
+          - tokenA:
+            ticker: "TOK1"
+            usd: 10
+            amount: 500
+            domain:
+              name: "dom0"
+          - tokenB:
+            ticker: "TOK2"
+            usd: 5
+            amount: 1000
+            domain:
+              name: "dom0"
+        pool:
+          pair:
+            - tokenA:
+              ticker: "TOK1"
+              usd: 10
+              amount: 26000
+              domain:
+                name: "dom0"
+            - tokenB:
+              ticker: "TOK2"
+              usd: 5
+              amount: 52000
+              domain:
+                name: "dom0"
+          domain:
+            name: "dom0"
+      - pos2:
+        pair:
+          - tokenA:
+            ticker: "TOK2"
+            usd: 5
+            amount: 5000
+            domain:
+              name: "dom1"
+          - tokenB:
+            ticker: "TOK1"
+            usd: 10
+            amount: 2500
+            domain:
+              name: "dom1"
+        pool:
+          pair:
+            - tokenA:
+              ticker: "TOK2"
+              usd: 5
+              amount: 10520
+              domain:
+                name: "dom1"
+            - tokenB:
+              ticker: "TOK1"
+              usd: 10
+              amount: 5260
+              domain:
+                name: "dom1"
+          domain:
+            name: "dom1"
+
+orders:
+  - order1:
+    user: "bob"
+    origin:
+      ticker: "TOK1"
+      usd: 10
+      amount: 20
+      domain:
+        name: "dom0"
+    target:
+      ticker: "TOK1"
+      usd: 10
+      amount: 20
+      domain:
+        name: "dom1"
+  - order2:
+    user: "alice"
+    origin:
+      ticker: "TOK1"
+      usd: 10
+      amount: 30
+      domain:
+        name: "dom1"
+    target:
+      ticker: "TOK3"
+      usd: 50
+      amount: 6
+      domain:
+        name: "dom1"
+  - order3:
+    user: "alice"
+    origin:
+      ticker: "TOK1"
+      usd: 10
+      amount: 3
+      domain:
+        name: "dom1"
+    target:
+      ticker: "TOK2"
+      usd: 5
+      amount: 6
+      domain:
+        name: "dom1"
+  - order4:
+    user: "bob"
+    origin:
+      ticker: "TOK3"
+      usd: 50
+      amount: 10
+      domain:
+        name: "dom1"
+    target:
+      ticker: "TOK2"
+      usd: 5
+      amount: 100
+      domain:
+        name: "dom1"
