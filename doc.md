@@ -1,4 +1,4 @@
-# **R**equest **F**or **Q**uote
+# \[R\]equest \[F\]or \[Q\]uote
 
 This application is a basic PoC of a cross-domain RFQ auction styled order-bid
 pairing system for users and market-makers / solvers to interact with each other
@@ -11,7 +11,7 @@ shortest number of steps as is possible. However, there are many assumptions and
 limitations in this implementation - which is why it is only a PoC and not a
 production ready (or usable in any manner besides testing) implementation.
 
-** This is only a PoC and is not intended to be used outside of testing at all.**
+**This is only a PoC and is not intended to be used outside of testing at all.**
 
 ## Features, Components, Assumptions and Details
 
