@@ -14,11 +14,13 @@ var (
 	DomainMap     map[string]uuid.UUID
 	TokenValueMap map[string]uint64
 	OrderList     []*Order
+	UserIDMap     map[uuid.UUID]*User
 )
 
 func init() {
 	DomainMap = make(map[string]uuid.UUID)
 	TokenValueMap = make(map[string]uint64)
+	UserIDMap = make(map[uuid.UUID]*User)
 	OrderList = make([]*Order, 0, 16)
 }
 
@@ -107,17 +109,16 @@ func (a *AgentsConfigs) ConvertUsers() map[uuid.UUID]*User {
 	if len(a.Users) == 0 {
 		return nil
 	}
-	users := make(map[uuid.UUID]*User, len(a.Users))
 	for _, u := range a.Users {
 		tokens := convertTokens(u.Tokens)
 		id := uuid.New()
-		users[id] = &User{
+		UserIDMap[id] = &User{
 			Name:   u.Name,
 			ID:     id,
 			Tokens: tokens,
 		}
 	}
-	return users
+	return UserIDMap
 }
 
 func (a *AgentsConfigs) ConvertSolvers() map[uuid.UUID]*Solver {
@@ -190,7 +191,8 @@ func (ac *AgentsConfigs) ConvertOrders(users map[uuid.UUID]*User) []*Order {
 				ord, err = user.CreateOrder(origin[0], target[0], time.Duration(timeout))
 			}
 			if err != nil {
-				panic(err)
+				fmt.Fprintf(os.Stderr, "User: %s - %v\n", user.Name, err)
+				break
 			}
 			OrderList = append(OrderList, ord)
 			break

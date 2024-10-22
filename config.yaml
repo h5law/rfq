@@ -26,7 +26,7 @@ users:
       - token2:
         ticker: "TOK2"
         usd: 5
-        amount: 200
+        amount: 200000
         domain:
           name: "dom1"
 
@@ -189,7 +189,7 @@ solvers:
             name: "dom1"
 
 orders:
-  - order1:
+  - order1:  # ✅ -- Fillable: TOK1_dom0 -> TOK2_dom0 :=> TOK2_dom1 -> TOK1_dom1 -- by MM2
     user: "bob"
     origin:
       ticker: "TOK1"
@@ -203,7 +203,7 @@ orders:
       amount: 20
       domain:
         name: "dom1"
-  - order2:
+  - order2:  # ✅ -- Fillable TOK1_dom1 -> TOK3_dom1 -- by MM1
     user: "alice"
     origin:
       ticker: "TOK1"
@@ -217,7 +217,7 @@ orders:
       amount: 6
       domain:
         name: "dom1"
-  - order3:
+  - order3:  # ✅ -- FIllable: TOK1_dom1 -> TOK2_dom1 -- by MM1
     user: "alice"
     origin:
       ticker: "TOK1"
@@ -231,7 +231,7 @@ orders:
       amount: 6
       domain:
         name: "dom1"
-  - order4:
+  - order4:  # ❌ -- Not fillable: "bob" holds no TOK3
     user: "bob"
     origin:
       ticker: "TOK3"
@@ -243,5 +243,61 @@ orders:
       ticker: "TOK2"
       usd: 5
       amount: 100
+      domain:
+        name: "dom1"
+  - order5:  # ✅ -- Fillable: TOK1_dom0 -> TOK2_dom0 -- by MM2
+    user: "bob"
+    origin:
+      ticker: "TOK1"
+      usd: 10
+      amount: 10
+      domain:
+        name: "dom1"
+    target:
+      ticker: "TOK2"
+      usd: 5
+      amount: 20
+      domain:
+        name: "dom0"
+  - order6:  # ❌ -- Not fillable: alice only has 2 TOK3_dom1
+    user: "alice"
+    origin:
+      ticker: "TOK3"
+      usd: 50
+      amount: 5
+      domain:
+        name: "dom1"
+    target:
+      ticker: "TOK2"
+      usd: 5
+      amount: 50
+      domain:
+        name: "dom0"
+  - order7:  # ❌ -- Not fillable: there is no exit token B of TOK3_dom0
+    user: "bob"
+    origin:
+      ticker: "TOK2"
+      usd: 5
+      amount: 50
+      domain:
+        name: "dom0"
+    target:
+      ticker: "TOK3"
+      usd: 50
+      amount: 5
+      domain:
+        name: "dom0"
+  - order8:  # ❌ -- Not fillable: no solver has enough TOK2_dom0/1
+    user: "bob"
+    origin:
+      ticker: "TOK2"
+      usd: 5
+      amount: 5000
+      domain:
+        name: "dom0"
+    target:
+      ticker: "TOK3"
+      usd: 50
+      amount: 5000
       domain:
         name: "dom1"

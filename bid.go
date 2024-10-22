@@ -3,7 +3,6 @@ package main
 import (
 	"cmp"
 	"fmt"
-	"math/rand"
 	"os"
 	"slices"
 	"time"
@@ -25,7 +24,8 @@ func (s *Solver) findOrderPath(order *Order) []Liquidity {
 		graph[p.TokenA] = append(graph[p.TokenA], p.TokenB)
 	}
 
-	tv := order.OriginToken.Amount * order.OriginToken.ValueUSD
+	ov := order.OriginToken.Amount * order.OriginToken.ValueUSD
+	tv := order.TargetToken.Amount * order.TargetToken.ValueUSD
 	queue := []QueueElement{{
 		Token: order.OriginToken,
 		Path:  []Trade{},
@@ -52,16 +52,8 @@ func (s *Solver) findOrderPath(order *Order) []Liquidity {
 			visited[elem.Token.Ticker+"-"+elem.Token.Domain.Name] = true
 			for _, neighbour := range reducedGraph[elem.Token.Ticker+"-"+elem.Token.Domain.Name] {
 				if !visited[neighbour.Ticker+"-"+neighbour.Domain.Name] {
-					if tv >= uint64(
-						(1.0+min(
-							rand.Float64()+0.05,
-							0.15,
-						))*float64(
-							elem.Token.Amount,
-						)*float64(
-							elem.Token.ValueUSD,
-						),
-					) {
+					if ov > elem.Token.Amount*elem.Token.ValueUSD ||
+						tv > elem.Token.Amount*elem.Token.ValueUSD {
 						continue
 					}
 					newPath := append([]Trade{}, elem.Path...)
@@ -75,6 +67,9 @@ func (s *Solver) findOrderPath(order *Order) []Liquidity {
 					newElem := a.Ticker + "-" + a.Domain.Name
 					for _, b := range bs {
 						if !visited[newElem] {
+							if ov >= a.Amount*a.ValueUSD || tv >= a.Amount*a.ValueUSD {
+								continue
+							}
 							newPath := append([]Trade{}, elem.Path...)
 							newPath = append(newPath, Trade{a, b})
 							queue = append(queue, QueueElement{Token: b, Path: newPath})

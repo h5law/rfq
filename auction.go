@@ -74,7 +74,11 @@ func (u *User) Start(auction *Auction) {
 			continue
 		}
 		bids := make([]*Bid, 0, len(solvers))
-		fmt.Printf("Posting Order: %s...\n", order.OrderID.String())
+		fmt.Printf("%s Posting Order: %s-%s -> %s-%s [%s]...\n",
+			UserIDMap[order.UserID].Name,
+			order.OriginToken.Ticker, order.OriginToken.Domain.Name,
+			order.TargetToken.Ticker, order.TargetToken.Domain.Name,
+			order.OrderID.String())
 		auction.Post(order)
 	inner:
 		for {

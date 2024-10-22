@@ -236,6 +236,23 @@ type Order struct {
 }
 
 func (o *Order) Validate() error {
+	u, ok := UserIDMap[o.UserID]
+	if !ok {
+		return fmt.Errorf("Invalid order: No user with ID found: got %s", o.UserID.String())
+	}
+	hasOrigin := false
+	for _, token := range u.Tokens {
+		if o.OriginToken.PartialMatch(&token) && o.OriginToken.Amount <= token.Amount {
+			hasOrigin = true
+			break
+		}
+	}
+	if !hasOrigin {
+		return fmt.Errorf(
+			"Invalid Order: User does not have or have enough of token: %s-%s",
+			o.OriginToken.Ticker, o.OriginToken.Domain.Name,
+		)
+	}
 	if o.ExitTime != nil {
 		if !o.EntryTime.Before(*o.ExitTime) {
 			return fmt.Errorf(
