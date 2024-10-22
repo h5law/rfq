@@ -1,6 +1,6 @@
 # rfq
 
-A simple **\[R\]**equest **\[F\]**or **\[Q\]**uote cross-domain, auction-styled,
+A simple \[**R**\]equest \[**F**\]or \[**Q**\]uote cross-domain, auction-styled,
 order-bid pairing system for Market Makers / Solvers to respond to User's posted
 orders with a bid specifying how through their positions in liquidity pools an
 order to swap token `A` for token `B` on domains `X` and `Y` respectively can be
