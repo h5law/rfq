@@ -18,37 +18,34 @@ production ready (or usable in any manner besides testing) implementation.
 The configuration file lays out a few example cases of erroring orders, invalid
 bids, competing bids, cross-domain bids and regular bids in a deterministic manner.
 The errors from invalid configurations or invalid bids/orders should be caught
-and either `panic`-ed or displayed to in the output respectively.
+and either `panic`-ed or displayed in the output respectively.
 
 - Agents
-  - Agents are defined as typed units in the codebase such that they interact
-    with the environment and are used to fulfil the desired use-case of the
-    system when combined. They are defined as follows:
-    - Tokens and Domains
-      - Tokens and Domains are abstractions to represent coins and chains in the
-        simplest sense. Tokens exist on any given Domain and may be inside of a 
-        liquidity pool in the case of MMs / Solvers. They have a specific value
-        in USD as well as amount held (or deposited in the case of a pool) as
-        well as ticker defined in addition to the Domain. Domains are simply a 
-        pairing of a domain name (e.g. "dom0") and a generated UUID. Their names
-        are unique in this implementation and for each unique name their is a 
-        corresponding unique UUID per domain.
-        - Token's USD value is represented of a single token not the entire of
-          the amount held.
-        - Token's Ticker values are assumed to be unique.
-        - Token's are assumed to be Partially Equal; a Match; or Equal when they:
-          have equal tickers and USD values; are partially equal and have the
-          same domain; or are a match and also have the same amount value.
-      - Tokens held by a single MM / Solver that are a partial match (same ticker
-        and USD values) are able to be exchanged for one another during a bid
-        offer. This assumes the MM is willing to take token `X_1` on domain `1` in
-        exchange for token `A` and then on domain `2` exchange `X_2` for token
-        `B` in the course of filling an order. For example, where `_N` represents
-        Ticker `T` on domain `N` such that for any `N` ticker `T_N` and `T_M` are
-        matches, a path across 2 domains may look like the following:
-        - `(TOK1_1 -> TOK2_1) -> (TOK2_2 -> TOK3_2)` which details a swap of
-          `TOK1` on domain 1 with `TOK3` on domain 2 via an intermediary exchange
-          of `TOK2` on domains 1 and 2 by the Solver.
+  - Tokens and Domains
+    - Tokens and Domains are abstractions to represent coins and chains in the
+      simplest sense. Tokens exist on any given Domain and may be inside of a 
+      liquidity pool in the case of MMs / Solvers. They have a specific value
+      in USD as well as amount held (or deposited in the case of a pool) as
+      well as ticker defined in addition to the Domain. Domains are simply a 
+      pairing of a domain name (e.g. "dom0") and a generated UUID. Their names
+      are unique in this implementation and for each unique name their is a 
+      corresponding unique UUID per domain.
+      - Token's USD value is represented of a single token not the entirety of
+        the amount held.
+      - Token's Ticker values are assumed to be unique.
+      - Token's are assumed to be Partially Equal; a Match; or Equal when they:
+        have equal tickers and USD values; are partially equal and have the
+        same domain; or are a match and also have the same amount value.
+    - Tokens held by a single MM / Solver that are a partial match (same ticker
+      and USD values) are able to be exchanged for one another during a bid
+      offer. This assumes the MM is willing to take token `X_1` on domain `1` in
+      exchange for token `A` and then on domain `2` exchange `X_2` for token
+      `B` in the course of filling an order. For example, where `_N` represents
+      Ticker `T` on domain `N` such that for any `N` ticker `T_N` and `T_M` are
+      matches, a path across 2 domains may look like the following:
+      - `(TOK1_1 -> TOK2_1) -> (TOK2_2 -> TOK3_2)` which details a swap of
+        `TOK1` on domain 1 with `TOK3` on domain 2 via an intermediary exchange
+        of `TOK2` on domains 1 and 2 by the Solver.
   - Paths and Pools
     - Pools are defined as abstractions of liquidity pools simply defining a
       pair of Tokens `A` and `B` with their respected token values and total
@@ -96,10 +93,10 @@ and either `panic`-ed or displayed to in the output respectively.
       addition to some generic fields such as the order ID, user ID and solver
       ID to identify the order, its creator and solver with. As well as an entry
       and exit time where the order was created and a bid accepted along with a
-      timeout period where to be filled - otherwise time'd-out orders are not filled. 
+      timeout period where to be filled - otherwise timed-out orders are not filled. 
       - If no timeout is specified in order configuration, then the maximum
         possible timeout period is used which is approximately equal to 290
-        years from the timestamp at the time of order creation. Essentially
+        years from the time-stamp at the time of order creation. Essentially
         making orders with no specified timeout open forever or until all solvers
         have submitted a bid (including `nil` bids for unfilled orders).
       - In this specific system the potential for partial filling orders is very
@@ -252,7 +249,7 @@ and either `panic`-ed or displayed to in the output respectively.
       pairing system should remain off-chain for efficiency (unless absolutely
       necessary that it live on-chain for some reason - in this case regular
       proofs can be posted on chain instead in a commit and reveal claim and 
-      proof style lifecycle where state integrity of the auction is guarenteed
+      proof style life-cycle where state integrity of the auction is guaranteed
       authentic via its posted proof). Users, Solvers, Pools, Tokens/Coins,
       Domains/Chains will all be replaced with there on-chain equivalent APIs
       and libraries. Much of the boilerplate code from this model will be
@@ -276,7 +273,7 @@ and either `panic`-ed or displayed to in the output respectively.
       and thus their arbitrage is more likely to occur. They must also be aware
       of any fees they will incur in gas and any other interactions they may make.
       By providing the solver with up-to-date information on the value of the
-      assets being exchanged and current fees etc, the system allows for the
+      assets being exchanged and current fees etc., the system allows for the
       solver to make better informed decisions.
     - In conjunction with the above users should also make more informed decisions
       when accepting a bid and settling an order. They should be aware of any

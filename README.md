@@ -13,7 +13,7 @@ design, architecture and overall function of the system as well as its pros and 
 
 ## Build and Run
 
-In order to build and run the simulation simply run the following:
+In order to build and run the simulation simply execute the following:
 
 ```console
 $ go build
@@ -38,5 +38,5 @@ bob Posting Order: TOK2-dom0 -> TOK3-dom1 [36028cb1-035d-481b-8386-6847eddda963]
 Order 36028cb1-035d-481b-8386-6847eddda963: not filled ❌
 ```
 
-In order to test new paths and orders simply edit the [./config.yaml](./config.yaml)
+In order to test new paths and orders simply edit the [config.yaml](./config.yaml)
 file and add new orders, users, and solvers to the environment.
